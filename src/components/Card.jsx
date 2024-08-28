@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import ActionTypes from '../ActionTypes';
 
 const Card = ({ todo }) => {
   const dispatch = useDispatch();
@@ -8,13 +9,13 @@ const Card = ({ todo }) => {
   const handleDelete = () => {
     if (!confirm('Are you sure you want to delete? ')) return;
 
-    dispatch({ type: 'DELETE', payload: todo.id });
+    dispatch({ type: ActionTypes.DELETE_TODO, payload: todo.id });
     
   };
   const handleUpdate = () => {};
   const handleStatus = () => {
     const updatedTodo = { ...todo, is_done: !todo.is_done };
-    dispatch({ type: 'UPDATE', payload: updatedTodo });
+    dispatch({ type: ActionTypes.UPDATE_TODO, payload: updatedTodo });
   };
   return (
     <li className="p-4 my-5 rounded border shadow-lg ">

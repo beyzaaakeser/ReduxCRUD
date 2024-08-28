@@ -11,6 +11,7 @@
  */
 import { toast } from 'react-toastify';
 import { v4 } from 'uuid';
+import ActionTypes from '../../ActionTypes';
 const initialState = {
   todos: [],
 };
@@ -18,7 +19,7 @@ const initialState = {
 const todoReducer = (state = initialState, action) => {
   console.log('todo reducera geldi', action);
   switch (action.type) {
-    case 'ADD':
+    case ActionTypes.ADD_TODO:
       const newTodo = {
         id: v4(),
         text: action.payload,
@@ -32,7 +33,7 @@ const todoReducer = (state = initialState, action) => {
 
       return { todos: added };
 
-    case 'DELETE':
+    case ActionTypes.DELETE_TODO:
       const filtredTodos = state.todos.filter(
         (todo) => todo.id !== action.payload
       );
@@ -40,11 +41,11 @@ const todoReducer = (state = initialState, action) => {
       toast.error('Todo deleted successfully');
       return { todos: filtredTodos };
 
-    case 'UPDATE':
+    case ActionTypes.UPDATE_TODO:
       const updated = state.todos.map((item) =>
         item.id === action.payload.id ? action.payload : item
       );
-      
+
       return { todos: updated };
     default:
       return state;
