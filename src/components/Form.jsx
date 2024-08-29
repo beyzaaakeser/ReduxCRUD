@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import ActionTypes from '../ActionTypes';
-
+import { addTodo } from '../redux/actions';
 const Form = () => {
   // Actionları reducera ileeten methodun Reduxta kurulumu bu şekilde.
   const dispatch = useDispatch();
@@ -13,8 +13,8 @@ const Form = () => {
 
     if (!text) return toast.warn('Please enter the content');
 
-    dispatch({ type: ActionTypes.ADD_TODO, payload: text });
-
+    // dispatch({ type: ActionTypes.ADD_TODO, payload: text });
+    dispatch(addTodo(text));
     e.target.reset();
   };
   return (
